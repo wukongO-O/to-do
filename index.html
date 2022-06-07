@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List</title>
+    <script src="./main.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </div>
+        <div class="title">To-do List</div>
+    </div>
+
+    <div class="main">
+    <div class="panel">
+        <div class="tasks">
+            <button class="today">Today</button>
+            <button class="upcoming">Upcoming</button>
+            <button class="star">Starred</button>
+        </div>
+        <div class="projects">Projects
+            <div class="projectList"></div>
+            <button>Add a project</button>
+        </div>
+    </div>
+
+    <div class="display">
+        <div class="taskList"></div>
+        <button>Add a task</button>
+            <!-- hidden until clicked -->
+            <form id="addTask">
+                <fieldset>
+                <textarea id="taskTitle" rows="1" cols="60" wrap="hard" resize="none" overflow="auto" placeholder="e.g.bake a cake"></textarea>
+                <textarea rows="4" cols="60" wrap="hard" resize="none" overflow="auto" placeholder="Description"></textarea>
+                <div class="dueDate">
+                    <button>Today</button>
+                    <!--hidden until clicked-->
+                    <input type="date" name="duedate">
+                </div>
+                <div class="starred">
+                    <label for="starTask">Star</label>
+                    <input type="checkbox" id="starTask" name="starred_task">
+                </div>
+                <div class="priority">
+                    <select name="priority_level">
+                        <option value="priority1">Priority 1</option>
+                        <option value="priority2">Priority 2</option>
+                        <option value="priority3">Priority 3</option>
+                        <option value="priority4">Priority 4</option>
+                    </select>
+                </div>
+                <div class="save">
+                    <button class="cancel">Cancel</button>
+                    <button class="submit">Submit</button>
+                </div>
+                </fieldset> 
+            </form>
+    </div>
+    </div>
+
+    <footer class="footer"> 2022 © Shenglan L</footer>
+</div>
+</body>
+</html>
