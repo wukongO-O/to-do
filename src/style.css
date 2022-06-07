@@ -1,0 +1,29 @@
+.container {
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}
+
+.header, .footer {
+    background-color:antiquewhite;
+}
+.title {
+    text-align: center;
+}
+
+.main {
+    display: flex;
+}
+.panel {
+    background-color: aquamarine;
+    flex: 1;
+}
+.tasks {
+    display: flex;
+    flex-direction: column;
+}
+.display {
+    background-color: azure;
+    flex: 3;
+}
