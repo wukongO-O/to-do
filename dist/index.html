@@ -19,6 +19,7 @@
     <div class="main">
     <div class="panel">
         <div class="tasks">
+            <button class="all">All Tasks</button>
             <button class="today">Today</button>
             <button class="upcoming">Upcoming</button>
             <button class="star">Starred</button>
@@ -26,28 +27,45 @@
         <div class="projects">Projects
             <div class="projectList"></div>
             <button>Add a project</button>
+            <!--hidden until clicked-->
+                <form id="projectForm">
+                    <label for="projectName">Name</label>
+                    <input type="text" id="projectName" name="project_name"> 
+                    <div class="starred">
+                        <label for="starTask">Star</label>
+                        <input type="checkbox" id="starTask" name="starred_task">
+                    </div>
+                    <div class="save">
+                        <button class="cancel">Cancel</button>
+                        <button class="addProject">Add</button>
+                    </div>
+                </form>
         </div>
     </div>
 
     <div class="display">
-        <div class="taskList"></div>
-        <button>Add a task</button>
+        <div class="taskList">
+            <div class="listToday"></div>
+            <div class="listUpcoming" style="display: none"></div>
+            <div class="listStarred" style="display: none"></div>
+            <div class="listAll" style="display: none"></div>
+        </div>
+        <button class="addATask">Add a task</button>
             <!-- hidden until clicked -->
-            <form id="addTask">
+            <form id="taskForm" style="display: none">
                 <fieldset>
-                <textarea id="taskTitle" rows="1" cols="60" wrap="hard" resize="none" overflow="auto" placeholder="e.g.bake a cake"></textarea>
-                <textarea rows="4" cols="60" wrap="hard" resize="none" overflow="auto" placeholder="Description"></textarea>
-                <div class="dueDate">
-                    <button>Today</button>
-                    <!--hidden until clicked-->
-                    <input type="date" name="duedate">
+                <textarea id="taskTitle" rows="1" cols="60" wrap="hard" overflow="auto" placeholder="e.g.bake a cake"></textarea>
+                <textarea id="taskDes" rows="4" cols="60" wrap="hard" overflow="auto" placeholder="Description"></textarea>
+                <div>
+                    <label for="dueDate">Due date</label>
+                    <input id="dueDate" type="date" name="duedate">
                 </div>
                 <div class="starred">
-                    <label for="starTask">Star</label>
-                    <input type="checkbox" id="starTask" name="starred_task">
+                    <label for="starredTask">Star</label>
+                    <input type="checkbox" id="starredTask">
                 </div>
-                <div class="priority">
-                    <select name="priority_level">
+                <div>
+                    <select class="priority" name="priority_level">
                         <option value="priority1">Priority 1</option>
                         <option value="priority2">Priority 2</option>
                         <option value="priority3">Priority 3</option>
@@ -55,11 +73,12 @@
                     </select>
                 </div>
                 <div class="save">
-                    <button class="cancel">Cancel</button>
-                    <button class="submit">Submit</button>
+                    <button type="submit" class="submit">Save</button>
+                    <button type="button" class="cancelbtn">Cancel</button>
                 </div>
                 </fieldset> 
             </form>
+            
     </div>
     </div>
 

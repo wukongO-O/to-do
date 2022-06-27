@@ -27,3 +27,6 @@
     background-color: azure;
     flex: 3;
 }
+textarea {
+    resize: none;
+}
