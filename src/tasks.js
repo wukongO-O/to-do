@@ -29,7 +29,6 @@ class Task {
 class CreateTask extends Task{
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
         super(taskTitle, taskDescription, dueDate, priority, starred)
-        this.allTasks = []
     }
     static showAddTask() {
         var taskForm = document.querySelector('#taskForm');
@@ -66,18 +65,19 @@ class CreateTask extends Task{
             starred: newTaskStar.checked,
             priority: newTaskPriority.value,
         };
-        this.allTasks.push(aTask);
-
         let aTask_serial = JSON.stringify(aTask);
         localStorage.setItem('newTask', aTask_serial);
+
+            //need to fix: @localStorage - a new task overwrites alltasks
+        let allTasks = [];
+        let allTasks_serial = JSON.stringify(allTasks);
+        localStorage.setItem('allTasks', allTasks_serial);
 
         newTaskTitle.value = '';
         newTaskDes.value = '';
         newTaskDue.value = '';
         newTaskStar.checked = false;
         newTaskPriority.value = '';
-
-        
 
         //categorize the task to a list based on duedate
         let listToday = [];
@@ -101,6 +101,8 @@ class CreateTask extends Task{
         taskForm.style.display = 'none';
         listAllTasks.style.display = 'block';
     }
+
+     
 
     completeTask(){
         newTaskName.addEventListener('click', function (e) {
