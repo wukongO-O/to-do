@@ -26,6 +26,7 @@ class Task {
 
 //create new task as object + save each object to localStorage
 //make taskform visible -> submit or cancel the form -> a) if cancelled: hidden the form b) if submitted: display form data + another layer of functions after task/elements created by DOM (delete + edit)
+let allTasks = [];
 class CreateTask extends Task{
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
         super(taskTitle, taskDescription, dueDate, priority, starred)
@@ -68,8 +69,8 @@ class CreateTask extends Task{
         let aTask_serial = JSON.stringify(aTask);
         localStorage.setItem('newTask', aTask_serial);
 
-            //need to fix: @localStorage - a new task overwrites alltasks
-        let allTasks = [];
+        //save each new task to an array in local storage
+        allTasks[allTasks.length] = JSON.parse(localStorage.newTask); 
         let allTasks_serial = JSON.stringify(allTasks);
         localStorage.setItem('allTasks', allTasks_serial);
 
