@@ -8,25 +8,17 @@ class Task {
         this.priority = priority
         this.starred = starred
     }
-    static formattedDue() {
-        return format(new Date(dueDate), 'MM/dd/yyyy');
-    }
-    static formattedToday() {
-        return formattedToday = format(new Date(), 'MM/dd/yyyy');
-    }
-    static starredOrNot() {
-        //this.starred = document.getElementById('starTask');
-        if (this.starred == 'checked') {
-            return true;
-        } else {
-            return false;
-        } 
-    }
 }
 
 //create new task as object + save each object to localStorage
 //make taskform visible -> submit or cancel the form -> a) if cancelled: hidden the form b) if submitted: display form data + another layer of functions after task/elements created by DOM (delete + edit)
 let allTasks = [];
+const newTaskTitle = document.querySelector('#taskTitle');
+const newTaskDes = document.querySelector('#taskDes');
+const newTaskDue = document.querySelector('#dueDate');
+const newTaskStar = document.getElementById('starredTask')
+const newTaskPriority = document.querySelector('.priority');
+
 class CreateTask extends Task{
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
         super(taskTitle, taskDescription, dueDate, priority, starred)
@@ -40,24 +32,51 @@ class CreateTask extends Task{
         return document.querySelector('#taskForm').style.display = "none";
     }
 
+    formattedDue(due) {
+        return format(new Date(due), 'MM/dd/yyyy');
+    }
+    formattedToday() {
+        return format(new Date(), 'MM/dd/yyyy');
+    }
+
+    taskList(list) {
+        list.innerHTML += `
+        <ul class='task'> ${newTaskTitle.value}
+            <li class='tdescription'> ${newTaskDes.value} </li>
+            <li class='tdue'> ${newTaskDue.value} </li>
+            <li class='tstar'> ${newTaskStar.checked} </li>
+            <li class='tpriority'> ${newTaskPriority.value} </li>
+        </ul> `;
+    }
+//fix format date function
+    categorizeTask() {
+//categorize the task to a list based on duedate --to do: (set in localstorage +) assign to display under corresponding tabs - hidden until clicked - show in another function/click event 
+        const listToday = document.querySelector('.listToday');
+        const listUpcoming = document.querySelector('.listUpcoming');
+        const listStarred = document.querySelector('.listStarred');
+
+         if (compareAsc(this.formattedDue(newTaskDue.value), this.formattedToday()) == 0) {
+             this.taskList(listToday);
+             //listToday.style.display = 'block';
+         } else if (compareAsc(this.formattedDue(newTaskDue.value), this.formattedToday())== 1) {
+             this.taskList(listUpcoming);
+         } else if (compareAsc(this.formattedDue(newTaskDue.value), this.formattedToday())== -1) {
+             newTaskDue.value = 'overdue';
+         } else {
+             newTaskDue.value = 'noDuedate'; 
+         };
+ 
+         if (newTaskStar.checked == true) {
+             this.taskList(listStarred);
+         } 
+    }
+
     saveTask() {
         //create a task in all tasks by default
-        const listAllTasks = document.querySelector('.listAll');
-        const newTaskTitle = document.querySelector('#taskTitle')
-        const newTaskDes = document.querySelector('#taskDes');
-        const newTaskDue = document.querySelector('#dueDate');
-        const newTaskStar = document.getElementById('starredTask')
-        const newTaskPriority = document.querySelector('.priority');
-
         if (newTaskTitle.value.length < 1) return;
-
-        listAllTasks.innerHTML += `
-            <ul class='task'> ${newTaskTitle.value}
-                <li class='tdescription'> ${newTaskDes.value} </li>
-                <li class='tdue'> ${newTaskDue.value} </li>
-                <li class='tstar'> ${newTaskStar.checked} </li>
-                <li class='tpriority'> ${newTaskPriority.value} </li>
-            </ul> `;
+        
+        const listAllTasks = document.querySelector('.listAll');
+        this.taskList(listAllTasks);
         
         let aTask = {
             taskTitle: newTaskTitle.value,
@@ -80,30 +99,10 @@ class CreateTask extends Task{
         newTaskStar.checked = false;
         newTaskPriority.value = '';
 
-        //categorize the task to a list based on duedate
-        let listToday = [];
-        let listUpcoming = [];
-        let listStarred = [];
-/*
-        if (compareAsc(this.dueDate.formattedDue(), formattedToday()) == 0) {
-            listToday.push(this);
-        } else if (compareAsc(this.dueDate.formattedDue(), formattedToday())== 1) {
-            listUpcoming.push(this);
-        } else if (compareAsc(this.dueDate.formattedDue(), formattedToday())== -1) {
-            newTaskDue.value = 'overdue';
-        } else {
-            newTaskDue.value = 'noDuedate'; 
-        };
-
-        if (newTaskStar.value == 'checked') {
-            listStarred.push(this);
-        } */
-
+        this.categorizeTask();
         taskForm.style.display = 'none';
         listAllTasks.style.display = 'block';
     }
-
-     
 
     completeTask(){
         newTaskName.addEventListener('click', function (e) {
