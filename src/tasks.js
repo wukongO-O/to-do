@@ -1,4 +1,4 @@
-import { compareAsc, format } from 'date-fns'
+import { compareAsc, format, parseISO } from 'date-fns'
 
 class Task {
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
@@ -32,11 +32,14 @@ class CreateTask extends Task{
         return document.querySelector('#taskForm').style.display = "none";
     }
 
-    formattedDue(due) {
-        return format(new Date(due), 'MM/dd/yyyy');
-    }
     formattedToday() {
-        return format(new Date(), 'MM/dd/yyyy');
+        const today = new Date()
+        return today.setHours(0, 0, 0, 0);
+    }
+
+    formattedDue() {
+        const formatDue = parseISO(`${newTaskDue.value}`);
+        return formatDue.setHours(0, 0, 0, 0);
     }
 
     taskList(list) {
@@ -48,23 +51,19 @@ class CreateTask extends Task{
             <li class='tpriority'> ${newTaskPriority.value} </li>
         </ul> `;
     }
-//fix format date function
+
     categorizeTask() {
 //categorize the task to a list based on duedate --to do: (set in localstorage +) assign to display under corresponding tabs - hidden until clicked - show in another function/click event 
         const listToday = document.querySelector('.listToday');
         const listUpcoming = document.querySelector('.listUpcoming');
         const listStarred = document.querySelector('.listStarred');
 
-         if (compareAsc(this.formattedDue(newTaskDue.value), this.formattedToday()) == 0) {
+         if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
              this.taskList(listToday);
              //listToday.style.display = 'block';
-         } else if (compareAsc(this.formattedDue(newTaskDue.value), this.formattedToday())== 1) {
+         } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
              this.taskList(listUpcoming);
-         } else if (compareAsc(this.formattedDue(newTaskDue.value), this.formattedToday())== -1) {
-             newTaskDue.value = 'overdue';
-         } else {
-             newTaskDue.value = 'noDuedate'; 
-         };
+         } 
  
          if (newTaskStar.checked == true) {
              this.taskList(listStarred);
@@ -93,13 +92,14 @@ class CreateTask extends Task{
         let allTasks_serial = JSON.stringify(allTasks);
         localStorage.setItem('allTasks', allTasks_serial);
 
+        this.categorizeTask();
+
         newTaskTitle.value = '';
         newTaskDes.value = '';
         newTaskDue.value = '';
         newTaskStar.checked = false;
         newTaskPriority.value = '';
 
-        this.categorizeTask();
         taskForm.style.display = 'none';
         listAllTasks.style.display = 'block';
     }
