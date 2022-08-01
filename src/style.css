@@ -30,3 +30,12 @@
 textarea {
     resize: none;
 }
+
+input[id='newTask']:checked~li.ttitle {
+    text-decoration: line-through;
+    color:black;
+}
+
+.dropdown {
+    display: none;
+}

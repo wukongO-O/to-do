@@ -44,12 +44,23 @@ class CreateTask extends Task{
 
     taskList(list) {
         list.innerHTML += `
-        <ul class='task'> ${newTaskTitle.value}
+        <ul class='task'> 
+            <input name='newT' type='checkbox' id='newTask'>
+            <label for='newTask'></label>    
+            <li class='ttitle'> ${newTaskTitle.value} </li>
             <li class='tdescription'> ${newTaskDes.value} </li>
             <li class='tdue'> ${newTaskDue.value} </li>
             <li class='tstar'> ${newTaskStar.checked} </li>
             <li class='tpriority'> ${newTaskPriority.value} </li>
-        </ul> `;
+        </ul> 
+        <div>    
+            <button class='dropdownbtn'> Menu </button>
+            <div class='dropdown'>
+                <button> Edit </button>
+                <button> Delete </button>
+            </div>
+        </div>
+        `;
     }
 
     categorizeTask() {
@@ -57,26 +68,31 @@ class CreateTask extends Task{
         const listToday = document.querySelector('.listToday');
         const listUpcoming = document.querySelector('.listUpcoming');
         const listStarred = document.querySelector('.listStarred');
-
          if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
              this.taskList(listToday);
              //listToday.style.display = 'block';
          } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
              this.taskList(listUpcoming);
          } 
- 
          if (newTaskStar.checked == true) {
              this.taskList(listStarred);
          } 
     }
 
+/* this function is not working right
+    taskMenuBtn() {
+        const showDropdown = document.querySelector('.dropdownbtn');
+        showDropdown.addEventListener('click', () => {
+            document.querySelector('.dropdown').classList.toggle('show');
+        });
+    }
+*/
     saveTask() {
         //create a task in all tasks by default
         if (newTaskTitle.value.length < 1) return;
         
         const listAllTasks = document.querySelector('.listAll');
         this.taskList(listAllTasks);
-        
         let aTask = {
             taskTitle: newTaskTitle.value,
             taskDescription: newTaskDes.value,
@@ -103,16 +119,16 @@ class CreateTask extends Task{
         taskForm.style.display = 'none';
         listAllTasks.style.display = 'block';
     }
-
-    completeTask(){
-        newTaskName.addEventListener('click', function (e) {
-            e.target.classList.toggle('checked');
-        }, false);
-    } 
 }
 
-class taskMenu extends Task {
+class TaskMenu extends CreateTask {
     //create & append a delete button
+    constructor(taskTitle, taskDescription, dueDate, priority, starred) {
+        super(taskTitle, taskDescription, dueDate, priority, starred)
+    }
+     
+
+
     menu() {
         const tspan = document.createElement('span');
         newTaskName.appendChild(tspan);
@@ -149,20 +165,4 @@ class taskMenu extends Task {
 
 }
 
-export { Task, CreateTask, taskMenu };
-
-/*const task = (taskTitle, taskDescription, dueDate, priority, starred) => {
-    const starredOrNot = () => {
-        if (starred == checked) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    const formattedDue = format(new Date(dueDate), 'MM/dd/yyyy');
-    const formattedToday = format(new Date(), 'MM/dd/yyyy');
-
-    return {taskTitle, taskDescription, dueDate, formattedDue, formattedToday, priority, starredOrNot};
-};
-*/
+export { Task, CreateTask, TaskMenu };
