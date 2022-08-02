@@ -39,3 +39,6 @@ input[id='newTask']:checked~li.ttitle {
 .dropdown {
     display: none;
 }
+div.showMenu {
+    display: block;
+}
