@@ -18,12 +18,9 @@ cancelTaskBtn.addEventListener('click', () => {
     CreateTask.cancelAddTask();
 });
 
-//works w bug - need separate event for clicking menu
 document.querySelector('.listAll').addEventListener('click', function(e) {
     if (e.target.classList.contains('dropdownbtn')) {
-        document.querySelector('.dropdown').classList.toggle('showMenu');
+        e.target.nextElementSibling.classList.toggle('showMenu');
     }
 });
-
-
     

@@ -79,14 +79,6 @@ class CreateTask extends Task{
          } 
     }
 
-/* this function is not working right
-    taskMenuBtn() {
-        const showDropdown = document.querySelector('.dropdownbtn');
-        showDropdown.addEventListener('click', () => {
-            document.querySelector('.dropdown').classList.toggle('show');
-        });
-    }
-*/
     saveTask() {
         //create a task in all tasks by default
         if (newTaskTitle.value.length < 1) return;
@@ -121,33 +113,10 @@ class CreateTask extends Task{
     }
 }
 
+//add delete&edit functions to the buttons
 class TaskMenu extends CreateTask {
-    //create & append a delete button
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
         super(taskTitle, taskDescription, dueDate, priority, starred)
-    }
-     
-
-
-    menu() {
-        const tspan = document.createElement('span');
-        newTaskName.appendChild(tspan);
-        const tmenu = document.createElement('button');
-        tmenu.classList.add('menuBtn');
-        tspan.appendChild(tmenu);
-        const dropdownM = document.createElement('div');
-        dropdownM.classList.add('menuContent');
-        tspan.appendChild(dropdownM);
-        const deletebtn = document.createElement(button);
-        deletebtn.classList.add('deleteBtn');
-        dropdownM.appendChild(deletebtn);
-        const editbtn = document.createElement(button);
-        editbtn.classList.add('editBtn');
-        dropdownM.appendChild(editbtn);
-    }
-
-    toggleMenu(){
-        dropdownM.classList.toggle('show');
     }
 
     deleteTask(){
