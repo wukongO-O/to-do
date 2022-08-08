@@ -23,4 +23,12 @@ document.querySelector('.listAll').addEventListener('click', function(e) {
         e.target.nextElementSibling.classList.toggle('showMenu');
     }
 });
-    
+
+document.querySelector('.listAll').addEventListener('click', function(e) {
+    if (e.target.classList.contains('del')) {
+        const toDelTask = e.target.parentNode.parentNode;
+        const deleteStoredItem = toDelTask.children[0].children[2].textContent;
+        localStorage.removeItem(deleteStoredItem);
+        toDelTask.innerHTML = '';
+    }
+})

@@ -44,20 +44,20 @@ class CreateTask extends Task{
 
     taskList(list) {
         list.innerHTML += `
-        <ul class='task'> 
-            <input name='newT' type='checkbox' id='newTask'>
-            <label for='newTask'></label>    
-            <li class='ttitle'> ${newTaskTitle.value} </li>
-            <li class='tdescription'> ${newTaskDes.value} </li>
-            <li class='tdue'> ${newTaskDue.value} </li>
-            <li class='tstar'> ${newTaskStar.checked} </li>
-            <li class='tpriority'> ${newTaskPriority.value} </li>
-        </ul> 
-        <div>    
+        <div>
+            <ul class='task'> 
+                <input name='newT' type='checkbox' id='newTask'>
+                <label for='newTask'></label>    
+                <li class='ttitle'>${newTaskTitle.value}</li>
+                <li class='tdescription'>${newTaskDes.value}</li>
+                <li class='tdue'>${newTaskDue.value}</li>
+                <li class='tstar'>${newTaskStar.checked}</li>
+                <li class='tpriority'>${newTaskPriority.value}</li>
+            </ul> 
             <button class='dropdownbtn'> Menu </button>
             <div class='dropdown'>
-                <button> Edit </button>
-                <button> Delete </button>
+                    <button class='edit'> Edit </button>
+                    <button class='del'> Delete </button>
             </div>
         </div>
         `;
@@ -85,18 +85,13 @@ class CreateTask extends Task{
         
         const listAllTasks = document.querySelector('.listAll');
         this.taskList(listAllTasks);
-        let aTask = {
-            taskTitle: newTaskTitle.value,
-            taskDescription: newTaskDes.value,
-            dueDate: newTaskDue.value,
-            starred: newTaskStar.checked,
-            priority: newTaskPriority.value,
-        };
+        
+        let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
         let aTask_serial = JSON.stringify(aTask);
-        localStorage.setItem('newTask', aTask_serial);
+        localStorage.setItem(newTaskTitle.value, aTask_serial);
 
         //save each new task to an array in local storage
-        allTasks[allTasks.length] = JSON.parse(localStorage.newTask); 
+        allTasks[allTasks.length] = JSON.parse(localStorage.getItem(newTaskTitle.value)); 
         let allTasks_serial = JSON.stringify(allTasks);
         localStorage.setItem('allTasks', allTasks_serial);
 
@@ -118,20 +113,13 @@ class TaskMenu extends CreateTask {
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
         super(taskTitle, taskDescription, dueDate, priority, starred)
     }
-
-    deleteTask(){
-        deletebtn.addEventListener('click', function() {
-            const toDel = this.parentElement.parentElement.parentElement;
-            toDel.style.display = 'none';
-            tasksection.removeChild(toDel);
-        })
-    }
+//delete from html - change display to array-based - to remove item from the array & localstorage
+    
     
     editTask() {
         document.getElementById('taskForm').removeAttribute('disabled');
         showAddTask();
     }
-
 }
 
 export { Task, CreateTask, TaskMenu };
