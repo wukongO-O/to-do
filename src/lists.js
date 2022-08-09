@@ -10,9 +10,10 @@ class listsOfTasks extends task {
         })
     }
     
-    //to display tasks w class. upcoming
+    //to display tasks w class. upcoming - switch tabs function
     displayToday(){
-
+        document.querySelector('.listAll').style.display = 'none';
+        document.querySelector('.listToday').style.display = 'block';
     }
 
     displayUpcoming(){

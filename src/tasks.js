@@ -44,7 +44,7 @@ class CreateTask extends Task{
 
     taskList(list) {
         list.innerHTML += `
-        <div>
+        <div class='${list.className}'>
             <ul class='task'> 
                 <input name='newT' type='checkbox' id='newTask'>
                 <label for='newTask'></label>    
@@ -106,6 +106,7 @@ class CreateTask extends Task{
         taskForm.style.display = 'none';
         listAllTasks.style.display = 'block';
     }
+
 }
 
 //add delete&edit functions to the buttons
@@ -115,11 +116,10 @@ class TaskMenu extends CreateTask {
     }
 //delete from html - change display to array-based - to remove item from the array & localstorage
     
-    
     editTask() {
         document.getElementById('taskForm').removeAttribute('disabled');
         showAddTask();
     }
 }
 
-export { Task, CreateTask, TaskMenu };
+export { Task, CreateTask, TaskMenu, newTaskTitle, newTaskDes, newTaskDue, newTaskPriority, newTaskStar };
