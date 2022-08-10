@@ -1,36 +1,31 @@
-import { task, createTask, taskMenu } from './tasks';
+import { Task, listAllTasks, listToday, listUpcoming, listStarred } from './tasks';
 
-class listsOfTasks extends task {
+class ListsOfTasks extends Task {
     //to display tasks w class .today
-    todaysTodos(){
-        const todaysTasks = [];
-        const todo4Today = document.querySelectorAll('.todoToday');
-        todo4Today.forEach( (todo)=> {
-            todaysTasks.push(todo);
-        })
+    static displayTasks(e) {
+        listAllTasks.style.display = 'none';
+        listToday.style.display = 'none';
+        listUpcoming.style.display = 'none';
+        listStarred.style.display = 'none';
+        
+        const taskbtns = document.querySelectorAll('.taskbtn');
+        taskbtns.forEach(tbtn => {
+            tbtn.className = tbtn.className.replace(' active', '');
+        });
+
+        if (e.currentTarget == document.querySelector('.all')) {
+            listAllTasks.style.display = 'block';
+        } else if (e.currentTarget == document.querySelector('.today')) {
+            listToday.style.display = 'block';
+        } else if (e.currentTarget == document.querySelector('.upcoming')) {
+            listUpcoming.style.display = 'block';
+        } else if (e.currentTarget == document.querySelector('.star')) {
+            listStarred.style.display = 'block';
+        };
+
+        e.currentTarget.className += ' active';
     }
     
-    //to display tasks w class. upcoming - switch tabs function
-    displayToday(){
-        document.querySelector('.listAll').style.display = 'none';
-        document.querySelector('.listToday').style.display = 'block';
     }
 
-    displayUpcoming(){
-    
-    }
-    
-    //to display tasks w class .starred
-    displayStarred(){
-    
-    }
-    //to display tasks w class .all
-    displayAllTasks(){
-    
-    }
-    
-    overdue(){
-    
-    }
-    
-    }
+export { ListsOfTasks }

@@ -1,4 +1,8 @@
-import { compareAsc, format, parseISO } from 'date-fns'
+import { 
+    compareAsc, 
+    format, 
+    parseISO 
+} from 'date-fns';
 
 class Task {
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
@@ -18,6 +22,11 @@ const newTaskDes = document.querySelector('#taskDes');
 const newTaskDue = document.querySelector('#dueDate');
 const newTaskStar = document.getElementById('starredTask')
 const newTaskPriority = document.querySelector('.priority');
+
+const listAllTasks = document.querySelector('.listAll');
+const listToday = document.querySelector('.listToday');
+const listUpcoming = document.querySelector('.listUpcoming');
+const listStarred = document.querySelector('.listStarred');
 
 class CreateTask extends Task{
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
@@ -65,9 +74,7 @@ class CreateTask extends Task{
 
     categorizeTask() {
 //categorize the task to a list based on duedate --to do: (set in localstorage +) assign to display under corresponding tabs - hidden until clicked - show in another function/click event 
-        const listToday = document.querySelector('.listToday');
-        const listUpcoming = document.querySelector('.listUpcoming');
-        const listStarred = document.querySelector('.listStarred');
+        
          if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
              this.taskList(listToday);
              //listToday.style.display = 'block';
@@ -83,7 +90,6 @@ class CreateTask extends Task{
         //create a task in all tasks by default
         if (newTaskTitle.value.length < 1) return;
         
-        const listAllTasks = document.querySelector('.listAll');
         this.taskList(listAllTasks);
         
         let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
@@ -91,7 +97,7 @@ class CreateTask extends Task{
         localStorage.setItem(newTaskTitle.value, aTask_serial);
 
         //save each new task to an array in local storage
-        allTasks[allTasks.length] = JSON.parse(localStorage.getItem(newTaskTitle.value)); 
+        allTasks.push(JSON.parse(localStorage.getItem(newTaskTitle.value))); 
         let allTasks_serial = JSON.stringify(allTasks);
         localStorage.setItem('allTasks', allTasks_serial);
 
@@ -122,4 +128,4 @@ class TaskMenu extends CreateTask {
     }
 }
 
-export { Task, CreateTask, TaskMenu, newTaskTitle, newTaskDes, newTaskDue, newTaskPriority, newTaskStar };
+export { Task, CreateTask, TaskMenu, newTaskTitle, newTaskDes, newTaskDue, newTaskPriority, newTaskStar, listAllTasks, listToday, listUpcoming, listStarred }

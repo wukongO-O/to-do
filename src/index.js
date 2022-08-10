@@ -1,5 +1,15 @@
 import './style.css';
-import { Task, CreateTask, TaskMenu, newTaskTitle, newTaskDes, newTaskDue, newTaskPriority, newTaskStar } from './tasks';
+import { 
+    Task, 
+    CreateTask, 
+    TaskMenu, 
+    newTaskTitle, 
+    newTaskDes, 
+    newTaskDue, 
+    newTaskPriority, 
+    newTaskStar 
+} from './tasks';
+import { ListsOfTasks } from './lists';
 
 const addATaskBtn = document.querySelector('.addATask');
 addATaskBtn.addEventListener('click', () => {
@@ -55,3 +65,11 @@ function editTask(e) {
 }
 
 document.querySelector('.listAll').addEventListener('click', editTask);
+
+const taskBtns = document.querySelectorAll('.taskbtn');
+taskBtns.forEach(tBtn => {
+    tBtn.addEventListener('click', (e) => {
+        ListsOfTasks.displayTasks(e);
+    })
+});
+//document.querySelector('.taskbtn .active').click();
