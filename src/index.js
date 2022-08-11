@@ -7,7 +7,8 @@ import {
     newTaskDes, 
     newTaskDue, 
     newTaskPriority, 
-    newTaskStar 
+    newTaskStar, 
+    listAllTasks
 } from './tasks';
 import { ListsOfTasks } from './lists';
 
@@ -33,18 +34,19 @@ function showMenu(e) {
         e.target.nextElementSibling.classList.toggle('showMenu');
     };
 }
-document.querySelector('.listAll').addEventListener('click', showMenu);
+document.querySelector('.taskList').addEventListener('click', showMenu);
 
+//mune + del + edit dont work under other lists - eventlistener only added to alllists
 function deleteTask(e) {
     if (e.target.classList.contains('del')) {
         const toDelTask = e.target.parentNode.parentNode;
         const deleteStoredItem = toDelTask.children[0].children[2].textContent;
         localStorage.removeItem(deleteStoredItem);
         toDelTask.innerHTML = '';
-        //need to delete the same task in other lists
+        //need to delete the same task in other lists - if toDelTask's className == 
     }
 }
-document.querySelector('.listAll').addEventListener('click', deleteTask);
+document.querySelector('.taskList').addEventListener('click', deleteTask);
 
 function editTask(e) {
     if (e.target.classList.contains('edit')) {
@@ -60,11 +62,11 @@ function editTask(e) {
         const delToEdit = toEdit.children[0].children[2].textContent;
         localStorage.removeItem(delToEdit);
         toEdit.innerHTML = '';
-//need to delete the same task in other lists
+//bug1 - need to delete the same task in other lists
     }
 }
 
-document.querySelector('.listAll').addEventListener('click', editTask);
+document.querySelector('.taskList').addEventListener('click', editTask);
 
 const taskBtns = document.querySelectorAll('.taskbtn');
 taskBtns.forEach(tBtn => {
@@ -72,4 +74,3 @@ taskBtns.forEach(tBtn => {
         ListsOfTasks.displayTasks(e);
     })
 });
-//document.querySelector('.taskbtn .active').click();

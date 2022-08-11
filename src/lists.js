@@ -1,7 +1,6 @@
 import { Task, listAllTasks, listToday, listUpcoming, listStarred } from './tasks';
 
 class ListsOfTasks extends Task {
-    //to display tasks w class .today
     static displayTasks(e) {
         listAllTasks.style.display = 'none';
         listToday.style.display = 'none';

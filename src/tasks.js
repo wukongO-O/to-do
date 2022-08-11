@@ -28,6 +28,10 @@ const listToday = document.querySelector('.listToday');
 const listUpcoming = document.querySelector('.listUpcoming');
 const listStarred = document.querySelector('.listStarred');
 
+let tasksToday = [];
+let tasksUpcoming = [];
+let tasksStarred = []; 
+
 class CreateTask extends Task{
     constructor(taskTitle, taskDescription, dueDate, priority, starred) {
         super(taskTitle, taskDescription, dueDate, priority, starred)
@@ -51,6 +55,43 @@ class CreateTask extends Task{
         return formatDue.setHours(0, 0, 0, 0);
     }
 
+
+//revise this display method - use array: list.push(this) -> display list array: map (when remove an item, find the obj to delete)
+    taskList2 (listDom, list, tItem) {
+        list.push(tItem);
+        listDom.innerHTML += `
+        <div class='${tItem.taskTitle}'>
+            <ul class='task'>
+                <input name='newT' type='checkbox' id='newTask'>
+                <label for='newTask'></label>
+                <li class='ttitle'>${tItem.taskTitle}</li>
+                <li class='tdescription'>${tItem.taskDescription}</li>
+                <li class='tdue'>${tItem.dueDate}</li>
+                <li class='tpriority'>${tItem.priority}</li>
+                <li class='tstar'>${tItem.starred}</li>
+            </ul>
+            <button class='dropdownbtn'> Menu </button>
+            <div class='dropdown'>
+                    <button class='edit'> Edit </button>
+                    <button class='del'> Delete </button>
+            </div>
+        </div>
+        `
+    }
+
+    categorizeTask2(t) {
+        //categorize the task to a list based on duedate --to do: (set in localstorage +) assign to display under corresponding tabs - hidden until clicked - show in another function/click event 
+                
+                 if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
+                     this.taskList2(listToday, tasksToday, t);
+                 } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
+                     this.taskList2(listUpcoming, tasksUpcoming, t);
+                 } 
+                 if (newTaskStar.checked == true) {
+                     this.taskList2(listStarred, tasksStarred, t);
+                 } 
+            }
+/*
     taskList(list) {
         list.innerHTML += `
         <div class='${list.className}'>
@@ -77,7 +118,6 @@ class CreateTask extends Task{
         
          if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
              this.taskList(listToday);
-             //listToday.style.display = 'block';
          } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
              this.taskList(listUpcoming);
          } 
@@ -85,14 +125,16 @@ class CreateTask extends Task{
              this.taskList(listStarred);
          } 
     }
-
+*/
     saveTask() {
         //create a task in all tasks by default
         if (newTaskTitle.value.length < 1) return;
         
-        this.taskList(listAllTasks);
-        
         let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
+
+        this.taskList2(listAllTasks, allTasks, aTask);
+        
+        
         let aTask_serial = JSON.stringify(aTask);
         localStorage.setItem(newTaskTitle.value, aTask_serial);
 
@@ -101,7 +143,7 @@ class CreateTask extends Task{
         let allTasks_serial = JSON.stringify(allTasks);
         localStorage.setItem('allTasks', allTasks_serial);
 
-        this.categorizeTask();
+        this.categorizeTask2(aTask);
 
         newTaskTitle.value = '';
         newTaskDes.value = '';
