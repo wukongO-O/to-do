@@ -32,7 +32,7 @@ class CreateTask extends Task{
         super(taskTitle, taskDescription, dueDate, priority, starred)
     }
     static showAddTask() {
-        var taskForm = document.querySelector('#taskForm');
+        const taskForm = document.querySelector('#taskForm');
         return taskForm.style.display = "block";
     }
 

@@ -10,6 +10,7 @@ import {
     listAllTasks
 } from './tasks';
 import { ListsOfTasks } from './lists';
+import { Project } from './projects';
 
 const addATaskBtn = document.querySelector('.addATask');
 addATaskBtn.addEventListener('click', () => {
@@ -73,3 +74,9 @@ taskBtns.forEach(tBtn => {
         ListsOfTasks.displayTasks(e);
     })
 });
+
+//Project
+const addAProjectBtn = document.querySelector('.addProjectBtn');
+addAProjectBtn.addEventListener('click', () => {
+    Project.showAddProject();
+})
