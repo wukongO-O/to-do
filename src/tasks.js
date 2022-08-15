@@ -50,7 +50,7 @@ class CreateTask extends Task{
         return formatDue.setHours(0, 0, 0, 0);
     }
 
-    taskList2 (listDom, tItem, tItemId) {
+    taskList (listDom, tItem, tItemId) {
         
         listDom.innerHTML += `
         <div class='task${tItemId}'>
@@ -72,38 +72,31 @@ class CreateTask extends Task{
         `
     }
 
-    categorizeTask2(t, n) {
+    categorizeTask(t, n) {
         //categorize the task to a list based on duedate 
         if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
-            this.taskList2(listToday, t, n);
+            this.taskList(listToday, t, n);
         } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
-            this.taskList2(listUpcoming, t, n);
+            this.taskList(listUpcoming, t, n);
         } 
         if (newTaskStar.checked == true) {
-            this.taskList2(listStarred, t, n);
+            this.taskList(listStarred, t, n);
         } 
 }
 
-    saveTask() {
+    saveTask(listDom) {
         //create a task in all tasks by default
         if (newTaskTitle.value.length < 1) return;
         
         let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
 
         tItemId +=1;
-        this.taskList2(listAllTasks, aTask, tItemId);
-        
+        this.taskList(listDom, aTask, tItemId);
         
         let aTask_serial = JSON.stringify(aTask);
         localStorage.setItem(`task${tItemId}`, aTask_serial);
 
-        /*save each new task to an array in local storage
-        allTasks.push(JSON.parse(localStorage.getItem(`task${tItemId}`))); 
-        let allTasks_serial = JSON.stringify(allTasks);
-        localStorage.setItem('allTasks', allTasks_serial);
-        */
-
-        this.categorizeTask2(aTask, tItemId);
+        this.categorizeTask(aTask, tItemId);
 
         newTaskTitle.value = '';
         newTaskDes.value = '';
@@ -112,7 +105,7 @@ class CreateTask extends Task{
         newTaskPriority.value = '';
 
         taskForm.style.display = 'none';
-        listAllTasks.style.display = 'block';
+        listDom.style.display = 'block';
     }
 
 }
