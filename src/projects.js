@@ -1,6 +1,8 @@
 import {Task, CreateTask, listStarred} from './tasks';
 import {ListsOfTasks} from './lists';
+import { id } from 'date-fns/locale';
 
+let projectId = 0;
 class Project {
     constructor(projectName) {
         this.projectName = projectName;
@@ -9,18 +11,35 @@ class Project {
         const addAProjectForm = document.querySelector('#projectForm');
         return addAProjectForm.style.display = 'block';
     }
-
-    //show project name on the panel + display area w add a task function
+    static cancelAddProject() {
+        document.querySelector('#projectName').value = '';
+        return document.querySelector('#projectForm').style.display = 'none';
+    }
     addProject() {
-        //get project name from the form - use it as project/list title + append it to project lists area & make it a clickable tab to switch display + append the list&add a task func to display area
         const projectForm = document.querySelector('#projectName').value;
- 
+        projectId += 1;
+
+        let aProject = new Project(projectForm);
+        let aProject_serial = JSON.stringify(aProject);
+        localStorage.setItem(`project${projectId}`, aProject_serial);
+
         const newProjectDiv = document.createElement('div');
-        newProjectDiv.textContent = `${projectForm}`;
+        newProjectDiv.classList.add('projectBtn');
+        newProjectDiv.id = `${projectId}`;
+        newProjectDiv.innerHTML = `
+            ${projectForm}
+                <button>Pmenu</button>
+                <div class='dropdown'>
+                    <button>Rename</button>
+                    <button>Delete</button>
+                </div>
+        `
         const projectList = document.querySelector('.projectList');
         projectList.appendChild(newProjectDiv);
 
-        const newProjectList = document.createElement('ul');
+        const newProjectList = document.createElement('div');
+        newProjectList.classList.add('project');
+        newProjectList.id = `project${projectId}`;
 
         ListsOfTasks.clearTaskDisplay();
         
@@ -32,13 +51,25 @@ class Project {
         document.querySelector('#projectName').value = '';
     }
 
-    addTaskToProject() {
-       //if e.currentTarget(project).display != none
-        CreateTask.saveTask(newProjectList);
+    addTaskToProject(project) {
+        const addTaskToProject = new CreateTask();
+        addTaskToProject.saveTask(project);
     }
 
-    displayProject() {
-//hide alltask list + display 1 project at a time
+    static displayProject(e) {
+        if (e.target.classList.contains('projectBtn')) {
+            ListsOfTasks.clearTaskDisplay();
+            const projectBtns = document.querySelectorAll('.projectBtn');
+            projectBtns.forEach(pBtn => {
+                pBtn.className = pBtn.className.replace(' active', '');
+            })
+
+            const projectN = e.target.id;
+            const currentProject = document.getElementById(`project${projectN}`);
+            currentProject.style.display = 'block';
+
+            e.target.className += ' active';
+        } 
     }
 
     editProject() {

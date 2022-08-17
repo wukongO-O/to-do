@@ -50,8 +50,7 @@ class CreateTask extends Task{
         return formatDue.setHours(0, 0, 0, 0);
     }
 
-    taskList (listDom, tItem, tItemId) {
-        
+    taskList (listDom, tItem, tItemId) {  
         listDom.innerHTML += `
         <div class='task${tItemId}'>
             <ul class='task'>
@@ -73,7 +72,6 @@ class CreateTask extends Task{
     }
 
     categorizeTask(t, n) {
-        //categorize the task to a list based on duedate 
         if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
             this.taskList(listToday, t, n);
         } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
@@ -82,10 +80,11 @@ class CreateTask extends Task{
         if (newTaskStar.checked == true) {
             this.taskList(listStarred, t, n);
         } 
+
+        //this.taskList(listAllTasks, t, n);
 }
 
     saveTask(listDom) {
-        //create a task in all tasks by default
         if (newTaskTitle.value.length < 1) return;
         
         let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
@@ -105,7 +104,6 @@ class CreateTask extends Task{
         newTaskPriority.value = '';
 
         taskForm.style.display = 'none';
-        listDom.style.display = 'block';
     }
 
 }

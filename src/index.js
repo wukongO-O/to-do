@@ -17,10 +17,26 @@ addATaskBtn.addEventListener('click', () => {
     CreateTask.showAddTask();
 });
 
+function addTasks() {
+    const projects = document.querySelectorAll('.project');
+       for (let i = 0; i < projects.length; i++){
+        if (projects[i].style.display == 'block') {
+            let displayedProjectId = projects[i].id;
+            let displayedProject = document.querySelector(`#${displayedProjectId}`);
+            const addTaskToProject = new CreateTask();
+            addTaskToProject.saveTask(displayedProject);
+            addTaskToProject.taskList(listAllTasks, addTaskToProject);
+            displayedProject.style.display = 'block';
+        } else {
+            const addTask = new CreateTask();
+            addTask.saveTask(listAllTasks);
+            listAllTasks.style.display = 'block';
+        };
+       }
+}
 taskForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    const addTask = new CreateTask();
-    addTask.saveTask(listAllTasks);
+    addTasks();
 });
 
 const cancelTaskBtn = document.querySelector('.cancelbtn');
@@ -79,16 +95,24 @@ taskBtns.forEach(tBtn => {
 const addAProjectBtn = document.querySelector('.addProjectBtn');
 addAProjectBtn.addEventListener('click', () => {
     Project.showAddProject();
-})
+});
 
 const projectForm = document.querySelector('#projectForm');
 projectForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const addAProject = new Project();
     addAProject.addProject();
-})
+});
 
+const cancelAProjectBtn = document.querySelector('.cancelProject');
+cancelAProjectBtn.addEventListener('click', () => {
+    Project.cancelAddProject();
+});
 
+//bug: 2nd click - task disapppears
+document.querySelector('.projectList').addEventListener('click', (e) => {
+    Project.displayProject(e);
+});
 
 
 

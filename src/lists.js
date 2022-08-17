@@ -2,8 +2,7 @@ import { Task, listAllTasks, listToday, listUpcoming, listStarred } from './task
 
 class ListsOfTasks extends Task {
     static clearTaskDisplay () {
-        const taskDisplay = document.querySelector('.taskList');
-        const allLists = taskDisplay.getElementsByTagName('*');
+        const allLists = document.querySelectorAll('.taskList > div');
         for (let i = 0; i < allLists.length; i++) {
             allLists[i].style.display = 'none';
         };
