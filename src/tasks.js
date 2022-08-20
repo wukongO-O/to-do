@@ -80,8 +80,6 @@ class CreateTask extends Task{
         if (newTaskStar.checked == true) {
             this.taskList(listStarred, t, n, id);
         } 
-
-        //this.taskList(listAllTasks, t, n);
 }
 
     saveTask(listDom, projectID) {
@@ -96,7 +94,6 @@ class CreateTask extends Task{
         localStorage.setItem(`task${tItemId}`, aTask_serial);
 
         this.categorizeTask(aTask, tItemId, projectID);
-        //listDom.lastElementChild.classList.add(projectID);
 
         newTaskTitle.value = '';
         newTaskDes.value = '';
@@ -106,10 +103,6 @@ class CreateTask extends Task{
 
         taskForm.style.display = 'none';
     }
-    
-
-    
-
 }
 
 export { Task, CreateTask, newTaskTitle, newTaskDes, newTaskDue, newTaskPriority, newTaskStar, listAllTasks, listToday, listUpcoming, listStarred }

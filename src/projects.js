@@ -72,7 +72,6 @@ class Project {
         } 
     }
 
-    //bug: remove the task also + cancel button w different function/override original cancel function
     static editProject(e) {
         if(e.target.classList.contains('rename')) {
             const toRename = e.target.parentNode.parentNode;
@@ -93,8 +92,6 @@ class Project {
             document.getElementById(`${toDelProjectId}`).remove();
         }
     }
-
-
 }
 
-export {Project};
+export { Project };

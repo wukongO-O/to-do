@@ -20,26 +20,6 @@ taskLists.addEventListener('click', (e) => {
     }
 });
 
-/*
-function addTasks() {
-    const addTask = new CreateTask();
-    addTask.saveTask(listAllTasks);
-    
-    const projects = document.querySelectorAll('.project');
-    for (let j = 0; j < projects.length; j++){
-        if (projects[j].style.display == 'block') {
-            let displayedProject = document.getElementById(`${projects[j].id}`);
-            //addTask.saveTask(displayedProject);
-            const projectTask = listAllTasks.lastElementChild;
-            const cloneProjectTask = projectTask.cloneNode(true);
-            displayedProject.appendChild(cloneProjectTask); 
-            ListsOfTasks.clearTaskDisplay();
-            displayedProject.style.display = 'block';
-        }
-    }
-} 
-//bug: edit from other lists except allTasks, can't save or task got deleted - 2 cases: 1)add from proejct 2)(edit &)  add from elsewhere 
-} */
 function addTasks() {
     const projects = document.querySelectorAll('.project');
     for (let j = 0; j < projects.length; j++) {
@@ -48,7 +28,6 @@ function addTasks() {
             const addTask = new CreateTask();
             addTask.saveTask(displayedProject, `${projects[j].id}`);
             const currentTask = displayedProject.lastElementChild;
-            //currentTask.classList.add(`${projects[j].id}`);
             const cloneTask = currentTask.cloneNode(true);
             listAllTasks.appendChild(cloneTask);
             ListsOfTasks.clearTaskDisplay();
@@ -59,7 +38,6 @@ function addTasks() {
             addTask2.saveTask(linkedProject, `${taskForm.className}`);
             const cloneTask2 = linkedProject.lastElementChild.cloneNode(true);
             listAllTasks.appendChild(cloneTask2);
-            //ListsOfTasks.clearTaskDisplay();
         }
     }  
     taskForm.removeAttribute('class');
@@ -94,7 +72,6 @@ function deleteTask(e) {
 }
 taskLists.addEventListener('click', deleteTask);
 
-//when edit from other lists except alltasks, tasks are all deleted - no reference point -> save task need to assign project - class may need to add @taskList
 function editTask(e) {
     if (e.target.classList.contains('edit')) {
         CreateTask.showAddTask();
@@ -144,19 +121,13 @@ cancelAProjectBtn.addEventListener('click', () => {
     Project.cancelAddProject();
 });
 
-document.querySelector('.projectList').addEventListener('click', (e) => {
+const projectMenus = document.querySelector('.projectList');
+projectMenus.addEventListener('click', (e) => {
     Project.displayProject(e);
-})
-
-taskLists.addEventListener('click', (e) => {
     Project.editProject(e);
-})
-
-taskLists.addEventListener('click', (e) => {
     Project.deleteProject(e);
-})
-
-taskLists.addEventListener('click', showDropdownMenu);
+    showDropdownMenu(e);
+});
 
 
 
