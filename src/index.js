@@ -38,7 +38,7 @@ function addTasks() {
         }
     }
 } 
-//bug: edit from other lists, can't save or task got deleted - 2 cases: 1)add from proejct 2)(edit &)  add from elsewhere 
+//bug: edit from other lists except allTasks, can't save or task got deleted - 2 cases: 1)add from proejct 2)(edit &)  add from elsewhere 
 } */
 function addTasks() {
     const projects = document.querySelectorAll('.project');
@@ -46,9 +46,9 @@ function addTasks() {
         if (projects[j].style.display == 'block') {
             let displayedProject = document.getElementById(`${projects[j].id}`);
             const addTask = new CreateTask();
-            addTask.saveTask(displayedProject);
+            addTask.saveTask(displayedProject, `${projects[j].id}`);
             const currentTask = displayedProject.lastElementChild;
-            currentTask.classList.add(`${projects[j].id}`);
+            //currentTask.classList.add(`${projects[j].id}`);
             const cloneTask = currentTask.cloneNode(true);
             listAllTasks.appendChild(cloneTask);
             ListsOfTasks.clearTaskDisplay();
@@ -56,7 +56,7 @@ function addTasks() {
         } else {
             const linkedProject = document.getElementById(`${taskForm.className}`);
             const addTask2 = new CreateTask();
-            addTask2.saveTask(linkedProject);
+            addTask2.saveTask(linkedProject, `${taskForm.className}`);
             const cloneTask2 = linkedProject.lastElementChild.cloneNode(true);
             listAllTasks.appendChild(cloneTask2);
             //ListsOfTasks.clearTaskDisplay();
@@ -94,7 +94,7 @@ function deleteTask(e) {
 }
 taskLists.addEventListener('click', deleteTask);
 
-//?bug: cancel creates a new task 
+//when edit from other lists except alltasks, tasks are all deleted - no reference point -> save task need to assign project - class may need to add @taskList
 function editTask(e) {
     if (e.target.classList.contains('edit')) {
         CreateTask.showAddTask();
@@ -107,7 +107,7 @@ function editTask(e) {
         const inProject = toEdit.classList.item(1);
         taskForm.classList.add(`${inProject}`);
 
-        const toEditTaskId = toEdit.className;
+        const toEditTaskId = toEdit.classList.item(0);
         const delItemsToEdit = document.querySelectorAll(`.${toEditTaskId}`);
         localStorage.removeItem(toEditTaskId);
         delItemsToEdit.forEach(item => {

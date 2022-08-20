@@ -50,9 +50,9 @@ class CreateTask extends Task{
         return formatDue.setHours(0, 0, 0, 0);
     }
 
-    taskList (listDom, tItem, tItemId) {  
+    taskList (listDom, tItem, tItemId, projectID) {  
         listDom.innerHTML += `
-        <div class='task${tItemId}'>
+        <div class='task${tItemId} ${projectID}'>
             <ul class='task'>
                 <input name='newT' type='checkbox' id='newTask'>
                 <label for='newTask'></label>
@@ -71,31 +71,32 @@ class CreateTask extends Task{
         `
     }
 
-    categorizeTask(t, n) {
+    categorizeTask(t, n, id) {
         if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
-            this.taskList(listToday, t, n);
+            this.taskList(listToday, t, n, id);
         } else if (compareAsc(this.formattedDue(), this.formattedToday()) == 1) {
-            this.taskList(listUpcoming, t, n);
+            this.taskList(listUpcoming, t, n, id);
         } 
         if (newTaskStar.checked == true) {
-            this.taskList(listStarred, t, n);
+            this.taskList(listStarred, t, n, id);
         } 
 
         //this.taskList(listAllTasks, t, n);
 }
 
-    saveTask(listDom) {
+    saveTask(listDom, projectID) {
         if (newTaskTitle.value.length < 1) return;
         
         let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
 
         tItemId +=1;
-        this.taskList(listDom, aTask, tItemId);
+        this.taskList(listDom, aTask, tItemId, projectID);
         
         let aTask_serial = JSON.stringify(aTask);
         localStorage.setItem(`task${tItemId}`, aTask_serial);
 
-        this.categorizeTask(aTask, tItemId);
+        this.categorizeTask(aTask, tItemId, projectID);
+        //listDom.lastElementChild.classList.add(projectID);
 
         newTaskTitle.value = '';
         newTaskDes.value = '';
