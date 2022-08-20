@@ -1,6 +1,5 @@
 import {Task, CreateTask, listStarred} from './tasks';
 import {ListsOfTasks} from './lists';
-import { id } from 'date-fns/locale';
 
 let projectId = 0;
 class Project {
@@ -15,8 +14,10 @@ class Project {
         document.querySelector('#projectName').value = '';
         return document.querySelector('#projectForm').style.display = 'none';
     }
+    
     addProject() {
         const projectForm = document.querySelector('#projectName').value;
+        if (projectForm.length < 1) return;
         projectId += 1;
 
         let aProject = new Project(projectForm);
@@ -28,10 +29,10 @@ class Project {
         newProjectDiv.id = `${projectId}`;
         newProjectDiv.innerHTML = `
             ${projectForm}
-                <button>Pmenu</button>
+                <button class='dropdownbtn'>Pmenu</button>
                 <div class='dropdown'>
-                    <button>Rename</button>
-                    <button>Delete</button>
+                    <button class='rename'>Rename</button>
+                    <button class='delProject'>Delete</button>
                 </div>
         `
         const projectList = document.querySelector('.projectList');
@@ -42,11 +43,13 @@ class Project {
         newProjectList.id = `project${projectId}`;
 
         ListsOfTasks.clearTaskDisplay();
-        
-        newProjectList.textContent = `${projectForm}`; 
+        newProjectList.innerHTML = `
+            ${projectForm}
+            <button class="addATask">Add a task</button>
+        `
         document.querySelector('.taskList').appendChild(newProjectList);
+        
         newProjectList.style.display = 'block';
-
         document.querySelector('#projectForm').style.display = 'none'; 
         document.querySelector('#projectName').value = '';
     }
@@ -63,21 +66,32 @@ class Project {
             projectBtns.forEach(pBtn => {
                 pBtn.className = pBtn.className.replace(' active', '');
             })
-
-            const projectN = e.target.id;
-            const currentProject = document.getElementById(`project${projectN}`);
-            currentProject.style.display = 'block';
-
+            let projectN = e.target.id;
+            document.getElementById(`project${projectN}`).style.display = 'block';
             e.target.className += ' active';
         } 
     }
 
-    editProject() {
+    //bug: remove the task also + cancel button w different function/override original cancel function
+    static editProject(e) {
+        if(e.target.classList.contains('rename')) {
+            const toRename = e.target.parentNode.parentNode;
+            document.getElementById('projectForm').style.display = 'block';
+            document.querySelector('#projectName').value = toRename.firstChild.textContent;
 
+            const toRenameProjectId = toRename.id;
+            localStorage.removeItem(`project${toRenameProjectId}`);
+            document.getElementById(`${toRenameProjectId}`).remove();
+        }
     }
 
-    deleteProject() {
-
+    static deleteProject(e) {
+        if (e.target.classList.contains('delProject')) {
+            const toDelProject = e.target.parentNode.parentNode;
+            const toDelProjectId = toDelProject.id;
+            localStorage.removeItem(`project${toDelProjectId}`);
+            document.getElementById(`${toDelProjectId}`).remove();
+        }
     }
 
 

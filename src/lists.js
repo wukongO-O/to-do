@@ -1,16 +1,18 @@
 import { Task, listAllTasks, listToday, listUpcoming, listStarred } from './tasks';
 
+
 class ListsOfTasks extends Task {
+
     static clearTaskDisplay () {
         const allLists = document.querySelectorAll('.taskList > div');
-        for (let i = 0; i < allLists.length; i++) {
-            allLists[i].style.display = 'none';
-        };
-    }
+        allLists.forEach(list => {
+            list.style.display = 'none';
+        });
+    } 
 
     static displayTasks(e) {
         this.clearTaskDisplay();
-        
+
         const taskbtns = document.querySelectorAll('.taskbtn');
         taskbtns.forEach(tbtn => {
             tbtn.className = tbtn.className.replace(' active', '');
