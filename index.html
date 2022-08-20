@@ -17,13 +17,7 @@
     </div>
 
     <div class="main">
-    <div class="panel">
-        <div class="tasks">
-            <button class="taskbtn all">All Tasks</button>
-            <button class="taskbtn today">Today</button>
-            <button class="taskbtn upcoming">Upcoming</button>
-            <button class="taskbtn star">Starred</button>
-        </div>
+    <div class="panel"> 
         <div class="projects">Projects
             <div class="projectList"></div>
             <button class="addProjectBtn">Add a project</button>
@@ -36,18 +30,22 @@
                     <button type="submit" class="addProject">Save</button>
                 </div>
             </form>
-            
+        </div>
+        <div class="tasks">
+            <button class="taskbtn all">All Tasks</button>
+            <button class="taskbtn today">Today</button>
+            <button class="taskbtn upcoming">Upcoming</button>
+            <button class="taskbtn star">Starred</button>
         </div>
     </div>
 
     <div class="display">
         <div class="taskList">
+            <div class="listAll" style="display: none"></div>
             <div class="listToday" style="display: none"></div>
             <div class="listUpcoming" style="display: none"></div>
             <div class="listStarred" style="display: none"></div>
-            <div class="listAll" style="display: none"></div>
-        </div>
-        <button class="addATask">Add a task</button>
+            
             <!-- hidden until clicked -->
             <form id="taskForm" style="display: none">
                 <fieldset>
@@ -76,6 +74,7 @@
                 </fieldset> 
             </form>
             
+        </div>
     </div>
     </div>
 
