@@ -10,17 +10,24 @@
 <body>
 <div class="container">
     <div class="header">
-        <div class="menu">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-        </div>
-        <div class="title">To-do List</div>
+        <div class="title">✅ To-do List</div>
     </div>
 
     <div class="main">
     <div class="panel"> 
-        <div class="projects">Projects
+        <div class="tasks">
+            <button class="taskbtn all"><img src="../src/img/list.svg" alt="all tasks icon"> All Tasks</button>
+            <button class="taskbtn today"><img src="../src/img/tody.svg" alt="today's tasks icon"> Today</button>
+            <button class="taskbtn upcoming"><img src="../src/img/upcoming.svg" alt="upcoming tasks icon"> Upcoming</button>
+            <button class="taskbtn star"><img src="../src/img/star.svg" alt="starred tasks icon"> Starred</button>
+        </div>
+        <div class="projects">
+            <div class="projectHeading">Projects</div>
             <div class="projectList"></div>
-            <button class="addProjectBtn">Add a project</button>
+            <div>
+                <button class="addProjectBtn"><img src="../src/img/add.svg" alt="add project icon"> Add project</button>
+            </div>
+            
             <!--hidden until clicked-->    
             <form id="projectForm" style="display: none">
                 <label for="projectName">Name</label>
@@ -31,21 +38,10 @@
                 </div>
             </form>
         </div>
-        <div class="tasks">
-            <button class="taskbtn all">All Tasks</button>
-            <button class="taskbtn today">Today</button>
-            <button class="taskbtn upcoming">Upcoming</button>
-            <button class="taskbtn star">Starred</button>
-        </div>
     </div>
 
     <div class="display">
         <div class="taskList">
-            <div class="listAll" style="display: none"></div>
-            <div class="listToday" style="display: none"></div>
-            <div class="listUpcoming" style="display: none"></div>
-            <div class="listStarred" style="display: none"></div>
-            
             <!-- hidden until clicked -->
             <form id="taskForm" style="display: none">
                 <fieldset>
@@ -73,12 +69,23 @@
                 </div>
                 </fieldset> 
             </form>
-            
+            <div class="listAll" style="display: none">
+                <div class="taskHeading">All Tasks</div>
+            </div>
+            <div class="listToday" style="display: none">
+                <div class="taskHeading">Today</div>
+            </div>
+            <div class="listUpcoming" style="display: none">
+                <div class="taskHeading">Upcoming</div>
+            </div>
+            <div class="listStarred" style="display: none">
+                <div class="taskHeading">Starred</div>
+            </div>
         </div>
     </div>
     </div>
 
-    <footer class="footer"> 2022 © Shenglan L</footer>
+    <footer class="footer"> 2022 © Shenglan L <a href="https://github.com/wukongO-O/to-do"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#eef4da" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></footer>
 </div>
 </body>
 </html>
