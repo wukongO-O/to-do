@@ -62,12 +62,12 @@ taskLists.addEventListener('click', showDropdownMenu);
 function deleteTask(e) {
     if (e.target.classList.contains('del')) {
         const toDelTask = e.target.parentNode.parentNode;
-        const toDelTaskId = toDelTask.className;
+        const toDelTaskId = toDelTask.classList.item(0);
         const toDelItems = document.querySelectorAll(`.${toDelTaskId}`);
         localStorage.removeItem(toDelTaskId);
         toDelItems.forEach(item => {
             item.remove();
-        })
+        });
     }
 }
 taskLists.addEventListener('click', deleteTask);

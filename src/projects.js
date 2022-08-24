@@ -29,7 +29,7 @@ class Project {
         newProjectDiv.id = `${projectId}`;
         newProjectDiv.innerHTML = `
             ${projectForm}
-                <button class='dropdownbtn'>Pmenu</button>
+                <button class='dropdownbtn'></button>
                 <div class='dropdown'>
                     <button class='rename'>Rename</button>
                     <button class='delProject'>Delete</button>
@@ -44,8 +44,8 @@ class Project {
 
         ListsOfTasks.clearTaskDisplay();
         newProjectList.innerHTML = `
-            ${projectForm}
-            <button class="addATask">Add a task</button>
+            <div class=projectTitle>${projectForm}</div>
+            <button class="addATask"><img src="../src/img/add.svg" alt="add project icon"> Add a task</button>
         `
         document.querySelector('.taskList').appendChild(newProjectList);
         

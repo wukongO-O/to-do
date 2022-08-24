@@ -50,9 +50,10 @@ class CreateTask extends Task{
         return formatDue.setHours(0, 0, 0, 0);
     }
 
+    //need a function to display starred item w star
     taskList (listDom, tItem, tItemId, projectID) {  
         listDom.innerHTML += `
-        <div class='task${tItemId} ${projectID}'>
+        <div class='task${tItemId} ${projectID} taskDiv'>
             <ul class='task'>
                 <input name='newT' type='checkbox' id='newTask'>
                 <label for='newTask'></label>
@@ -60,9 +61,9 @@ class CreateTask extends Task{
                 <li class='tdescription'>${tItem.taskDescription}</li>
                 <li class='tdue'>${tItem.dueDate}</li>
                 <li class='tpriority'>${tItem.priority}</li>
-                <li class='tstar'>${tItem.starred}</li>
+                <li class='tstar ${tItem.starred}'></li>
             </ul>
-            <button class='dropdownbtn'> Menu </button>
+            <button class='dropdownbtn'></button>
             <div class='dropdown'>
                     <button class='edit'> Edit </button>
                     <button class='del'> Delete </button>
@@ -85,7 +86,7 @@ class CreateTask extends Task{
     saveTask(listDom, projectID) {
         if (newTaskTitle.value.length < 1) return;
         
-        let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskStar.checked, newTaskPriority.value);
+        let aTask = new Task(newTaskTitle.value, newTaskDes.value, newTaskDue.value, newTaskPriority.value, newTaskStar.checked);
 
         tItemId +=1;
         this.taskList(listDom, aTask, tItemId, projectID);

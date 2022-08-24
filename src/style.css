@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'fff_tusjbold';
+    src: url('./fonts/fff_tusj-webfont.woff2') format('woff2'),
+         url('./fonts/fff_tusj-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: monospace;
+}
+
 .container {
     min-height: 100%;
     display: grid;
@@ -6,22 +19,39 @@
 }
 
 .header, .footer {
-    background-color:antiquewhite;
+    background-color:rgb(250, 218, 215);
+    text-align: center;
+    font-family: 'fff_tusjbold';
 }
 .title {
-    text-align: center;
+    font-size: 50pt;
+    padding: 30px 0;
+}
+.footer {
+    color: black;
+    padding: 8px 0 15px 0;
+}
+a > svg {
+    stroke: black;
+    position: relative;
+    top: 4px;
+    left: 2px;
+}
+a > svg :hover {
+    fill: black;
 }
 
 .main {
     display: flex;
 }
 .panel {
-    background-color: aquamarine;
+    background-color: rgb(255, 242, 127);
     flex: 1;
 }
 .tasks {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 .display {
     background-color: azure;
@@ -30,15 +60,178 @@
 textarea {
     resize: none;
 }
+.panel img {
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 0.4rem;
+}
+.panel button {
+    border: none;
+    width: 100%;
+    background-color: rgb(255, 242, 127);
+    text-align: left;
+    font-size: 20pt;
+    font-family: monospace;
+    padding: 0.5rem 0 0.5rem 5rem;
+}
 
+button:hover, .projectBtn:hover, .projectBtn:hover .dropdownbtn {
+    background-color: azure;
+}
+
+.projectHeading {
+    font-family: 'fff_tusjbold';
+    font-size: 30pt;
+    padding: 2rem 0 2rem 5rem;
+}
+.taskHeading {
+    font-family: 'fff_tusjbold';
+    font-size: 40pt;
+    padding: 20px;
+    margin: 55px;
+    text-align: center;
+}
+
+.projectBtn {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    align-items: baseline;
+    font-size: 20pt;
+    padding-left: 5rem;
+    position: relative;
+}
+.dropdownbtn {
+    background-image: url(../src/img/dotMenu.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+}
+
+.taskDiv {
+    position: relative;
+}
+.dropdown {
+    display: none;
+    position: absolute;
+    min-width: 50px;
+    z-index: 1;
+    top: -7rem;
+    left: 15vw;
+}
+div.showMenu {
+    display: block;
+}
+.dropdown button {
+    background-color: azure;
+}
+.taskDiv .dropdown.showMenu {
+    top: 40px;
+    display: grid;
+    right: 20px;
+    justify-content: end;
+    left: 0;
+}
+
+#projectForm {
+    margin: 1rem 0 0 5rem;
+    font-size: 20pt;
+}
+button.cancelProject, button.addProject {
+    border: solid 1px;
+    width: 15rem;
+    margin: 1rem;
+}
+input, textarea {
+    padding: 0.5em 2em;
+}
+
+.projectTitle {
+    font-family: 'fff_tusjbold';
+    font-size: 40pt;
+    padding: 40px;
+    text-align: center;
+}
+.display button {
+    font-family: monospace;
+    font-size: 12pt;
+    border: 1pt solid;
+    border-radius: 5px;
+    background-color: azure;
+}
+.display .addATask {
+    margin: 0 0 20px 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.display button:hover, #addTask button:hover {
+    background-color: rgb(255, 242, 127);
+}
+.save {
+    margin-top: 5px;
+}
+#taskForm {
+    font-family: monospace;
+    font-size: 12pt;
+}
+fieldset {
+    display: grid;
+    gap: 10px;
+    margin: 0 5rem;
+}
 input[id='newTask']:checked~li.ttitle {
     text-decoration: line-through;
     color:black;
 }
 
-.dropdown {
-    display: none;
+.taskList {
+    display: flex;
+    flex-direction: column-reverse;
 }
-div.showMenu {
-    display: block;
+.taskDiv {
+    display: flex;
+    gap: 20px;
+    padding: 0 40px;
+    align-items: baseline;
+}
+.task {
+    list-style-type: none;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 30px 600px 5fr 4fr 1fr;
+    grid-template-areas:
+        "one two four five six"
+        "three three three three three";
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1;
+    font-size: 12pt;
+}
+#newTask {
+    grid-area: one;
+}
+.ttitle {
+    grid-area: two;
+}
+.tdescription {
+    grid-area: three;
+}
+.tdue {
+    grid-area: four;
+}
+.tpriority {
+    grid-area: five;
+}
+.tstar {
+    grid-area: six;
+}
+.true {
+    background-image: url(./img/star.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
 }
