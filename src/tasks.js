@@ -1,6 +1,5 @@
 import { 
     compareAsc, 
-    format, 
     parseISO 
 } from 'date-fns';
 
@@ -50,7 +49,6 @@ class CreateTask extends Task{
         return formatDue.setHours(0, 0, 0, 0);
     }
 
-    //need a function to display starred item w star
     taskList (listDom, tItem, tItemId, projectID) {  
         listDom.innerHTML += `
         <div class='task${tItemId} ${projectID} taskDiv'>

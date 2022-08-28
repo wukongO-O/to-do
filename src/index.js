@@ -1,6 +1,5 @@
 import './style.css';
 import { 
-    Task, 
     CreateTask, 
     newTaskTitle, 
     newTaskDes, 
@@ -55,9 +54,20 @@ cancelTaskBtn.addEventListener('click', () => {
 function showDropdownMenu(e) {
     if (e.target.classList.contains('dropdownbtn')) {
         e.target.nextElementSibling.classList.toggle('showMenu');
-    };
+    }
 }
 taskLists.addEventListener('click', showDropdownMenu);
+window.onclick = function (e) {
+    if (!e.target.matches('.dropdownbtn')) {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        for (let i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('showMenu')) {
+                openDropdown.classList.remove('showMenu');
+            }
+        }
+    }
+}
 
 function deleteTask(e) {
     if (e.target.classList.contains('del')) {
@@ -87,12 +97,12 @@ function editTask(e) {
         const toEditTaskId = toEdit.classList.item(0);
         const delItemsToEdit = document.querySelectorAll(`.${toEditTaskId}`);
         localStorage.removeItem(toEditTaskId);
-        delItemsToEdit.forEach(item => {
+        delItemsToEdit.forEach((item) => {
             item.remove();
         });
 
         document.querySelector('.cancelbtn').type = 'submit';
-        }
+    }
 }
 taskLists.addEventListener('click', editTask);
 
@@ -129,5 +139,5 @@ projectMenus.addEventListener('click', (e) => {
     showDropdownMenu(e);
 });
 
-
+//to-do/bugs:  3)make cancel/save project buttons smaller 4)readme 5)clean up based on OOP principles
 

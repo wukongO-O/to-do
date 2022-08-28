@@ -1,5 +1,5 @@
-import {Task, CreateTask, listStarred} from './tasks';
-import {ListsOfTasks} from './lists';
+import { CreateTask } from './tasks';
+import { ListsOfTasks } from './lists';
 
 let projectId = 0;
 class Project {
@@ -29,10 +29,12 @@ class Project {
         newProjectDiv.id = `${projectId}`;
         newProjectDiv.innerHTML = `
             ${projectForm}
-                <button class='dropdownbtn'></button>
-                <div class='dropdown'>
-                    <button class='rename'>Rename</button>
-                    <button class='delProject'>Delete</button>
+                <div class = 'dropdownDiv'>
+                    <button class='dropdownbtn'></button>
+                    <div class='dropdown'>
+                        <button class='rename'>Rename</button>
+                        <button class='delProject'>Delete</button>
+                    </div>
                 </div>
         `
         const projectList = document.querySelector('.projectList');
@@ -86,10 +88,20 @@ class Project {
 
     static deleteProject(e) {
         if (e.target.classList.contains('delProject')) {
-            const toDelProject = e.target.parentNode.parentNode;
+            const toDelProject = e.target.parentNode.parentNode.parentNode;
             const toDelProjectId = toDelProject.id;
             localStorage.removeItem(`project${toDelProjectId}`);
             document.getElementById(`${toDelProjectId}`).remove();
+            //delete associated tasks in lists & localStorage
+            const toDelTasksAll = document.querySelectorAll(`.project${toDelProjectId}`);
+            const toDelTasksList = document.querySelectorAll(`#project${toDelProjectId} .project${toDelProjectId}`);
+            toDelTasksAll.forEach((task) => {
+                task.remove();
+            });
+            toDelTasksList.forEach((t) => {
+                const tStorageName = t.classList.item(0);
+                localStorage.removeItem(tStorageName);
+            });
         }
     }
 }

@@ -26,7 +26,7 @@ class ListsOfTasks extends Task {
             listUpcoming.style.display = 'block';
         } else if (e.currentTarget == document.querySelector('.star')) {
             listStarred.style.display = 'block';
-        };
+        }
 
         e.currentTarget.className += ' active';
     }

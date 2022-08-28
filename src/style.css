@@ -100,6 +100,7 @@ button:hover, .projectBtn:hover, .projectBtn:hover .dropdownbtn {
     font-size: 20pt;
     padding-left: 5rem;
     position: relative;
+    margin-bottom: 1rem;
 }
 .dropdownbtn {
     background-image: url(../src/img/dotMenu.svg);
@@ -112,14 +113,20 @@ button:hover, .projectBtn:hover, .projectBtn:hover .dropdownbtn {
 .taskDiv {
     position: relative;
 }
+.dropdownDiv {
+    float: right;
+    position: relative;
+    display: inline-block;
+}
 .dropdown {
     display: none;
     position: absolute;
     min-width: 50px;
     z-index: 1;
-    top: -7rem;
-    left: 15vw;
+    right: 0;
+    top: -6rem;
 }
+
 div.showMenu {
     display: block;
 }
