@@ -116,7 +116,6 @@ button:hover, .projectBtn:hover, .projectBtn:hover .dropdownbtn {
 .dropdownDiv {
     float: right;
     position: relative;
-    display: inline-block;
 }
 .dropdown {
     display: none;
@@ -124,7 +123,7 @@ button:hover, .projectBtn:hover, .projectBtn:hover .dropdownbtn {
     min-width: 50px;
     z-index: 1;
     right: 0;
-    top: -6rem;
+    top: -5.5rem;
 }
 
 div.showMenu {
@@ -134,9 +133,9 @@ div.showMenu {
     background-color: azure;
 }
 .taskDiv .dropdown.showMenu {
-    top: 40px;
+    top: 44px;
     display: grid;
-    right: 20px;
+    right: 10px;
     justify-content: end;
     left: 0;
 }
@@ -147,8 +146,11 @@ div.showMenu {
 }
 button.cancelProject, button.addProject {
     border: solid 1px;
-    width: 15rem;
-    margin: 1rem;
+    width: 8rem;
+    margin: 0.5rem;
+    padding: 0.2rem 0;
+    text-align: center;
+    border-radius: 5px;
 }
 input, textarea {
     padding: 0.5em 2em;
@@ -162,7 +164,7 @@ input, textarea {
 }
 .display button {
     font-family: monospace;
-    font-size: 12pt;
+    font-size: 16pt;
     border: 1pt solid;
     border-radius: 5px;
     background-color: azure;
@@ -182,7 +184,7 @@ input, textarea {
 }
 #taskForm {
     font-family: monospace;
-    font-size: 12pt;
+    font-size: 16pt;
 }
 fieldset {
     display: grid;
@@ -208,14 +210,14 @@ input[id='newTask']:checked~li.ttitle {
     list-style-type: none;
     display: grid;
     gap: 20px;
-    grid-template-columns: 30px 600px 5fr 4fr 1fr;
+    grid-template-columns: 30px 180px 6fr 3fr 1fr;
     grid-template-areas:
         "one two four five six"
         "three three three three three";
     justify-content: flex-start;
     align-items: center;
     flex: 1;
-    font-size: 12pt;
+    font-size: 16pt;
 }
 #newTask {
     grid-area: one;

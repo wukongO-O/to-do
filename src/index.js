@@ -69,6 +69,7 @@ window.onclick = function (e) {
     }
 }
 
+
 function deleteTask(e) {
     if (e.target.classList.contains('del')) {
         const toDelTask = e.target.parentNode.parentNode;
@@ -138,6 +139,4 @@ projectMenus.addEventListener('click', (e) => {
     Project.deleteProject(e);
     showDropdownMenu(e);
 });
-
-//to-do/bugs:  3)make cancel/save project buttons smaller 4)readme 5)clean up based on OOP principles
 
