@@ -45,7 +45,7 @@ class Project {
         ListsOfTasks.clearTaskDisplay();
         newProjectList.innerHTML = `
             <div class=projectTitle>${projectForm}</div>
-            <button class="addATask"><img src="../src/img/add.svg" alt="add project icon"> Add a task</button>
+            <button class="addATask"><img src="../dist/add.svg" alt="add project icon"> Add a task</button>
         `
         document.querySelector('.taskList').appendChild(newProjectList);
         
