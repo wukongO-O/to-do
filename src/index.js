@@ -11,7 +11,6 @@ import {
 import { ListsOfTasks } from './lists';
 import { Project } from './projects';
 
-
 const taskLists = document.querySelector('.taskList');
 taskLists.addEventListener('click', (e) => {
     if (e.target.classList.contains('addATask')) {
@@ -68,7 +67,6 @@ window.onclick = function (e) {
         }
     }
 }
-
 
 function deleteTask(e) {
     if (e.target.classList.contains('del')) {

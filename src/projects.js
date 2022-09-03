@@ -1,4 +1,3 @@
-import { CreateTask } from './tasks';
 import { ListsOfTasks } from './lists';
 
 let projectId = 0;
@@ -14,7 +13,6 @@ class Project {
         document.querySelector('#projectName').value = '';
         return document.querySelector('#projectForm').style.display = 'none';
     }
-    
     addProject() {
         const projectForm = document.querySelector('#projectName').value;
         if (projectForm.length < 1) return;
@@ -55,11 +53,6 @@ class Project {
         document.querySelector('#projectForm').style.display = 'none'; 
         document.querySelector('#projectName').value = '';
     }
-/*
-    addTaskToProject(project) {
-        const addTaskToProject = new CreateTask();
-        addTaskToProject.saveTask(project);
-    } */
 
     static displayProject(e) {
         if (e.target.classList.contains('projectBtn')) {
@@ -73,7 +66,6 @@ class Project {
             e.target.className += ' active';
         } 
     }
-
     static editProject(e) {
         if(e.target.classList.contains('rename')) {
             const toRename = e.target.parentNode.parentNode;
@@ -85,7 +77,6 @@ class Project {
             document.getElementById(`${toRenameProjectId}`).remove();
         }
     }
-
     static deleteProject(e) {
         if (e.target.classList.contains('delProject')) {
             const toDelProject = e.target.parentNode.parentNode.parentNode;

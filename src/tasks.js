@@ -34,21 +34,17 @@ class CreateTask extends Task{
         const taskForm = document.querySelector('#taskForm');
         return taskForm.style.display = "block";
     }
-
     static cancelAddTask() {
         return document.querySelector('#taskForm').style.display = "none";
     }
-
     formattedToday() {
         const today = new Date()
         return today.setHours(0, 0, 0, 0);
     }
-
     formattedDue() {
         const formatDue = parseISO(`${newTaskDue.value}`);
         return formatDue.setHours(0, 0, 0, 0);
     }
-
     taskList (listDom, tItem, tItemId, projectID) {  
         listDom.innerHTML += `
         <div class='task${tItemId} ${projectID} taskDiv'>
@@ -69,7 +65,6 @@ class CreateTask extends Task{
         </div>
         `
     }
-
     categorizeTask(t, n, id) {
         if (compareAsc(this.formattedDue(), this.formattedToday()) == 0) {
             this.taskList(listToday, t, n, id);
@@ -79,8 +74,7 @@ class CreateTask extends Task{
         if (newTaskStar.checked == true) {
             this.taskList(listStarred, t, n, id);
         } 
-}
-
+    }
     saveTask(listDom, projectID) {
         if (newTaskTitle.value.length < 1) return;
         
