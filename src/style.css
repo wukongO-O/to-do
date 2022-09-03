@@ -219,6 +219,9 @@ input[id='newTask']:checked~li.ttitle {
     flex: 1;
     font-size: 16pt;
 }
+.addATask svg {
+    transform: scale(0.75);
+}
 #newTask {
     grid-area: one;
 }
@@ -227,6 +230,8 @@ input[id='newTask']:checked~li.ttitle {
 }
 .tdescription {
     grid-area: three;
+    padding-left: 3rem;
+    color: rgb(97, 95, 95);
 }
 .tdue {
     grid-area: four;
