@@ -38,7 +38,8 @@ a > svg {
     left: 2px;
 }
 a > svg :hover {
-    fill: black;
+    stroke: #D8AC9C;
+    fill: #D8AC9C;
 }
 
 .main {
