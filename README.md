@@ -2,7 +2,7 @@
 ## Demo
 Click [here](https://wukongo-o.github.io/to-do/) to check out the to-do list! 🤓 📆 ✅ 🚩
 
-![To do list page demo](./src/img/todo-list.png)
+![To do list page demo](./src/img/to-do-demo!.gif)
 
 ## Description
 I designed and built the to-do list web app by following the OOP principals. It also uses webpack to bundle JS modules and manage assets.

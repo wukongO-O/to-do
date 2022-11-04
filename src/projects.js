@@ -1,5 +1,5 @@
 import { ListsOfTasks } from './lists';
-
+//bugs: 1) project rename - saved as a new project 2)can't save task after manipulating project name etc
 let projectId = 0;
 class Project {
     constructor(projectName) {
