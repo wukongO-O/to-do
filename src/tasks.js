@@ -98,4 +98,16 @@ class CreateTask extends Task{
     }
 }
 
-export { Task, CreateTask, newTaskTitle, newTaskDes, newTaskDue, newTaskPriority, newTaskStar, listAllTasks, listToday, listUpcoming, listStarred }
+export { 
+    Task, 
+    CreateTask, 
+    newTaskTitle, 
+    newTaskDes, 
+    newTaskDue, 
+    newTaskPriority, 
+    newTaskStar, 
+    listAllTasks, 
+    listToday, 
+    listUpcoming, 
+    listStarred 
+}

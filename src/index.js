@@ -30,13 +30,7 @@ function addTasks() {
             listAllTasks.appendChild(cloneTask);
             ListsOfTasks.clearTaskDisplay();
             displayedProject.style.display = 'block';
-        } else {
-            const linkedProject = document.getElementById(`${taskForm.className}`);
-            const addTask2 = new CreateTask();
-            addTask2.saveTask(linkedProject, `${taskForm.className}`);
-            const cloneTask2 = linkedProject.lastElementChild.cloneNode(true);
-            listAllTasks.appendChild(cloneTask2);
-        }
+        } 
     }  
     taskForm.removeAttribute('class');
 }
