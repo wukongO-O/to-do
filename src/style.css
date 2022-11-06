@@ -10,6 +10,7 @@
 body {
     margin: 0;
     font-family: monospace;
+    color: black;
 }
 
 .container {
@@ -123,7 +124,7 @@ form.renameForm {
     padding: 0 10px;
     width: 200px;
     background-color: #F4EEED;
-    border: solid 1px;
+    border: solid 1px black;
 }
 .submitEdit {
     display: flex;
@@ -132,7 +133,7 @@ form.renameForm {
 .submitEdit button {
     padding: 0;
     background-color: #F4EEED;
-    border: 1px solid;
+    border: 1px solid black;
   }
 .submitEdit button:hover {
     background-color: #D8AC9C;
@@ -188,7 +189,7 @@ div.showMenu {
     background: url(./img/x.svg) no-repeat;
 }
 button.cancelProject, button.addProject {
-    border: solid 1px;
+    border: solid 1px black;
     width: 8rem;
     margin: 0.5rem;
     padding: 0.2rem 0;
