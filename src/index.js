@@ -134,6 +134,8 @@ const projectMenus = document.querySelector('.projectList');
 projectMenus.addEventListener('click', (e) => {
     Project.displayProject(e);
     Project.editProject(e);
+    Project.saveProjectEdit(e);
+    Project.cancelProjectEdit(e);
     Project.deleteProject(e);
     showDropdownMenu(e);
 });

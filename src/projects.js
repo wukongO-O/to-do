@@ -1,5 +1,4 @@
 import { ListsOfTasks } from './lists';
-//bugs: 1) project rename - saved as a new project 2)can't save task after manipulating project name etc
 let projectId = 0;
 class Project {
     constructor(projectName) {
@@ -37,7 +36,7 @@ class Project {
         `
         const projectList = document.querySelector('.projectList');
         projectList.appendChild(newProjectDiv);
-
+        //create project and its linked tasks for display
         const newProjectList = document.createElement('div');
         newProjectList.classList.add('project');
         newProjectList.id = `project${projectId}`;
@@ -68,15 +67,42 @@ class Project {
     }
     static editProject(e) {
         if(e.target.classList.contains('rename')) {
-            const toRename = e.target.parentNode.parentNode;
-            document.getElementById('projectForm').style.display = 'block';
-            document.querySelector('#projectName').value = toRename.firstChild.textContent;
-
-            const toRenameProjectId = toRename.id;
-            localStorage.removeItem(`project${toRenameProjectId}`);
-            document.getElementById(`${toRenameProjectId}`).remove();
+            //change project name on the panel
+            const toRename = e.target.parentNode.parentNode.parentNode;
+            const editForm = document.createElement('form');
+            editForm.setAttribute('class', 'renameForm');
+            editForm.innerHTML = `
+                <input class='renameBox' value = ${toRename.firstChild.textContent.trim()} >
+                <div class='submitEdit'>
+                    <button class='saveNewName'></button>
+                    <button class='cancelChange'></button>
+                </div>
+            `
+            toRename.replaceChild(editForm, toRename.firstChild);
         }
     }
+    
+    static saveProjectEdit(e) {
+        if (e.target.classList.contains('saveNewName')) {
+            const editProject = e.target.parentNode.parentNode.parentNode;
+            let newProjectName = editProject.querySelector('.renameBox');
+            let newProjectNameNode = document.createTextNode(`${newProjectName.value}`);
+            const renameForm = editProject.querySelector('.renameForm');
+            editProject.replaceChild(newProjectNameNode, renameForm);
+            //change project name on display
+            let projectOnDisplay = document.querySelector(`#project${editProject.id} .projectTitle`);
+            projectOnDisplay.textContent = newProjectName.value;
+        }
+    }
+    static cancelProjectEdit(e) {
+        if (e.target.classList.contains('cancelChange')) {
+            const currentProject = e.target.parentNode.parentNode.parentNode;
+            const originalProjectName = document.querySelector(`#project${currentProject.id} .projectTitle`).textContent;
+            const originalProjectNode = document.createTextNode(`${originalProjectName}`);
+            currentProject.replaceChild(originalProjectNode, currentProject.firstChild);
+        }
+    }
+
     static deleteProject(e) {
         if (e.target.classList.contains('delProject')) {
             const toDelProject = e.target.parentNode.parentNode.parentNode;

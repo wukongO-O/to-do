@@ -114,7 +114,29 @@ button:hover, .projectBtn:hover, .projectBtn:hover .dropdownbtn {
     width: 30px;
     display: inherit;
 }
-
+form.renameForm {
+    display: flex;
+}
+.renameBox {
+    font-size: 15pt;
+    margin-right: 10px;
+    padding: 0 10px;
+    width: 200px;
+    background-color: #F4EEED;
+    border: solid 1px;
+}
+.submitEdit {
+    display: flex;
+    width: 50px;
+}
+.submitEdit button {
+    padding: 0;
+    background-color: #F4EEED;
+    border: 1px solid;
+  }
+.submitEdit button:hover {
+    background-color: #D8AC9C;
+}
 .taskDiv {
     position: relative;
 }
@@ -145,8 +167,25 @@ div.showMenu {
 }
 
 #projectForm {
-    margin: 1rem 0 0 5rem;
-    font-size: 20pt;
+    margin: 1rem 3rem 0 3rem;
+    font-size: 15pt;
+}
+#projectName {
+    width: 150px;
+  }
+#projectForm .save {
+    margin-top: 5px;
+    display: flex;
+    margin-left: 0;
+}
+.save button {
+    width: 100px;
+}
+.saveNewName {
+    background: url(./img/check.svg) no-repeat;
+}
+.cancelChange {
+    background: url(./img/x.svg) no-repeat;
 }
 button.cancelProject, button.addProject {
     border: solid 1px;
@@ -155,9 +194,13 @@ button.cancelProject, button.addProject {
     padding: 0.2rem 0;
     text-align: center;
     border-radius: 5px;
+    font-size: 15pt;
 }
 input, textarea {
-    padding: 0.5em 2em;
+    padding: 2px 1em;
+    font-size: 15pt;
+    background-color: #F4EEED;
+    border: solid 1px black;
 }
 
 .projectTitle {
